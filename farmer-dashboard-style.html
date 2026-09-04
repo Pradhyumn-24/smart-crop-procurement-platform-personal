@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard - KisanFlow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1b5e20;
+            --primary-light: #e8f5e9;
+            --accent: #2e7d32;
+            --surface: #ffffff;
+            --background: #f4f6f8;
+            --text: #1f2937;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            padding-bottom: 40px;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand h1 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .btn-icon {
+            background: var(--background);
+            border: 1px solid var(--border);
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            transition: background 0.2s;
+        }
+
+        .btn-icon:hover {
+            background: #eaeaea;
+        }
+
+        .lang-switch {
+            display: flex;
+            background: var(--background);
+            border-radius: 8px;
+            padding: 2px;
+            border: 1px solid var(--border);
+        }
+
+        .lang-switch button {
+            border: none;
+            background: none;
+            padding: 0.375rem 0.625rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .lang-switch button.active {
+            background: var(--surface);
+            color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        /* NAVIGATION */
+        nav {
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.875rem;
+            padding: 1rem 0;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+        }
+
+        nav a.active, nav a:hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* MAIN CONTENT */
+        main {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            main {
+                grid-template-columns: 2fr 1fr;
+            }
+            .welcome-card {
+                grid-column: span 2;
+            }
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text);
+        }
+
+        /* WELCOME BANNER */
+        .welcome-card {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+            color: white;
+            border: none;
+        }
+
+        .welcome-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .welcome-card p {
+            opacity: 0.9;
+            font-size: 0.875rem;
+        }
+
+        /* METRICS & DETAILS */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-box {
+            background: var(--background);
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .metric-box label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-box span {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* BUTTONS */
+        .btn-primary {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent);
+        }
+
+        /* QUICK ACTIONS */
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .action-card {
+            background: var(--primary-light);
+            border: 1px solid rgba(46, 125, 50, 0.2);
+            color: var(--primary);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .action-card:hover {
+            background: #d4edda;
+        }
+
+        /* TRACKER */
+        .tracker {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .step-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .step.done .step-icon { background: #d1fae5; color: #065f46; }
+        .step.active .step-icon { background: #fef3c7; color: #92400e; }
+        .step.pending .step-icon { background: #f3f4f6; color: #9ca3af; }
+
+        .step.pending span { color: var(--text-secondary); }
+
+        /* NOTIFICATION BANNER */
+        .alert-box {
+            background-color: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 0.875rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            color: #1e40af;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="brand">
+            <h1>🌾 KisanFlow</h1>
+            <p>Smart Agricultural Procurement Management</p>
+        </div>
+        <div class="header-actions">
+            <div class="lang-switch">
+                <button class="active">English</button>
+                <button>हिंदी</button>
+            </div>
+            <button class="btn-icon">🔔</button>
+            <button class="btn-icon">👤 Profile</button>
+        </div>
+    </header>
+
+    <nav>
+        <a href="farmer-dashboard.html" class="active">Dashboard</a>
+        <a href="book-slot.html">Book Slot</a>
+        <a href="queue.html">My Queue</a>
+        <a href="procurement.html">Procurement Status</a>
+        <a href="#">My Records</a>
+        <a href="index.html" style="margin-left: auto;">Logout</a>
+    </nav>
+
+    <main>
+
+        <section class="card welcome-card">
+            <h2>Welcome, Farmer! 👋</h2>
+            <p>Here you can manage your procurement appointments and track your live queue status.</p>
+        </section>
+
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">📅 My Appointment</h2>
+                </div>
+                <div class="details-grid">
+                    <div class="metric-box">
+                        <label>Centre</label>
+                        <span>Ghaziabad Centre</span>
+                    </div>
+                    <div class="metric-box">
+                        <label>Date</label>
+                        <span>5 Sep 2026</span>
+                    </div>
+                    <div class="metric-box">
+                        <label>Time</label>
+                        <span>10:00 - 11:00 AM</span>
+                    </div>
+                    <div class="metric-box">
+                        <label>Token</label>
+                        <span style="color: var(--primary); font-size: 1.1rem;">#45</span>
+                    </div>
+                </div>
+                <button class="btn-primary">View Appointment</button>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">🔄 Live Queue</h2>
+                </div>
+                <div class="details-grid">
+                    <div class="metric-box">
+                        <label>Currently Serving</label>
+                        <span>#42</span>
+                    </div>
+                    <div class="metric-box">
+                        <label>Your Token</label>
+                        <span>#45</span>
+                    </div>
+                    <div class="metric-box">
+                        <label>Farmers Ahead</label>
+                        <span>3</span>
+                    </div>
+                    <div class="metric-box">
+                        <label>Est. Wait Time</label>
+                        <span>25 mins</span>
+                    </div>
+                </div>
+                <button class="btn-primary">Track My Queue</button>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">⚡ Quick Actions</h2>
+                </div>
+                <div class="quick-actions-grid">
+                    <button class="action-card" onclick="location.href='book-slot.html'">➕<br>Book New Slot</button>
+                    <button class="action-card" onclick="location.href='queue.html'">📊<br>Track Queue</button>
+                    <button class="action-card" onclick="location.href='procurement.html'">📑<br>Status</button>
+                </div>
+            </section>
+
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">🔔 Latest Notification</h2>
+                </div>
+                <div class="alert-box">
+                    Your appointment is scheduled for 10:00 AM. Please arrive 15 minutes before your slot.
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">🌾 Procurement Progress</h2>
+                </div>
+                <div class="tracker">
+                    <div class="step done"><div class="step-icon">✓</div><span>Farmer Registration</span></div>
+                    <div class="step done"><div class="step-icon">✓</div><span>Slot Booking</span></div>
+                    <div class="step done"><div class="step-icon">✓</div><span>Arrival at Centre</span></div>
+                    <div class="step active"><div class="step-icon">🔄</div><span>Document Verification</span></div>
+                    <div class="step pending"><div class="step-icon">⏳</div><span>Procurement</span></div>
+                    <div class="step pending"><div class="step-icon">⏳</div><span>Payment</span></div>
+                </div>
+                <button class="btn-primary" onclick="location.href='procurement.html'">View Full Status</button>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">📍 Recommended Centre</h2>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; font-size: 0.875rem;">
+                    <div><strong>Ghaziabad Procurement Centre</strong></div>
+                    <div style="color: var(--text-secondary);">Distance: 4.5 km</div>
+                    <div style="color: var(--text-secondary);">Wait Time: ~25 mins</div>
+                    <div style="color: var(--accent); font-weight: 500;">Slots Available</div>
+                </div>
+                <button class="btn-primary">View Centre</button>
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 KisanFlow | SIH26032</p>
+        <p>Smart Agricultural Procurement Management System</p>
+    </footer>
+
+</body>
+
+</html>
