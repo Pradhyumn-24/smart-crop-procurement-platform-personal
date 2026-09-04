@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard - KisanFlow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gov-navy: #0b3c5d;
+            --gov-blue: #1d2731;
+            --gov-header-bg: #003366;
+            --sbi-blue: #0088cc;
+            --sbi-accent: #f26522;
+            --gov-gold: #d99b26;
+            --light-bg: #f4f7f9;
+            --card-bg: #ffffff;
+            --text-dark: #222222;
+            --text-muted: #555555;
+            --border-color: #cccccc;
+            --success-green: #28a745;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* GOV TOP BAR */
+        .top-gov-bar {
+            background-color: #111111;
+            color: #ffffff;
+            padding: 4px 10%;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-gov-bar span {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--gov-header-bg);
+            color: #ffffff;
+            padding: 12px 10%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 4px solid var(--gov-gold);
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            font-size: 2rem;
+            background: #ffffff;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-text h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        .brand-text p {
+            font-size: 0.75rem;
+            color: #dcdcdc;
+            text-transform: uppercase;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang-btn, .header-btn {
+            background: #ffffff;
+            color: var(--gov-navy);
+            border: 1px solid #ffffff;
+            padding: 4px 10px;
+            font-weight: 600;
+            font-size: 12px;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        .lang-btn.active {
+            background: var(--gov-gold);
+            color: #ffffff;
+            border-color: var(--gov-gold);
+        }
+
+        /* NAVIGATION BAR */
+        nav {
+            background-color: var(--gov-navy);
+            padding: 0 10%;
+            display: flex;
+            overflow-x: auto;
+            border-bottom: 1px solid #002244;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 16px;
+            font-weight: 600;
+            font-size: 13px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--sbi-blue);
+        }
+
+        nav a.logout {
+            margin-left: auto;
+            background-color: #c9302c;
+        }
+
+        /* MAIN LAYOUT */
+        main {
+            max-width: 1200px;
+            margin: 15px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        @media (min-width: 850px) {
+            main {
+                grid-template-columns: 2fr 1fr;
+            }
+            .full-width {
+                grid-column: span 2;
+            }
+        }
+
+        /* WELCOME BANNER */
+        .welcome-banner {
+            background: #ffffff;
+            border-left: 5px solid var(--sbi-blue);
+            padding: 12px 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .welcome-banner h2 {
+            font-size: 1.1rem;
+            color: var(--gov-navy);
+        }
+
+        .welcome-banner p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* GOV PORTAL CARDS */
+        .portal-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-top: 3px solid var(--gov-navy);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+
+        .portal-card-header {
+            background-color: #f0f4f8;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .portal-card-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--gov-navy);
+            text-transform: uppercase;
+        }
+
+        .portal-card-body {
+            padding: 12px;
+        }
+
+        /* DATA TABLES & GRIDS */
+        .gov-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .gov-table td {
+            padding: 8px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .gov-table td.label {
+            font-weight: 600;
+            color: var(--text-muted);
+            width: 40%;
+        }
+
+        .gov-table td.value {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        /* BUTTONS */
+        .btn-gov {
+            background-color: var(--sbi-blue);
+            color: #ffffff;
+            border: none;
+            padding: 6px 14px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 2px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .btn-gov:hover {
+            background-color: #006699;
+        }
+
+        .btn-gov-orange {
+            background-color: var(--sbi-accent);
+        }
+
+        .btn-gov-orange:hover {
+            background-color: #d9530f;
+        }
+
+        /* QUICK ACTIONS GRID */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+        }
+
+        .action-tab {
+            background: #f9f9f9;
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--gov-navy);
+            font-weight: 600;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .action-tab:hover {
+            border-color: var(--sbi-blue);
+            background: #eef7fc;
+        }
+
+        /* PROGRESS TRACKER (SBI / UIDAI Style) */
+        .gov-tracker {
+            list-style: none;
+            padding: 5px 0;
+        }
+
+        .gov-tracker li {
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .gov-tracker li span.status-icon {
+            width: 20px;
+            font-weight: bold;
+        }
+
+        .gov-tracker li.completed { color: var(--success-green); }
+        .gov-tracker li.current { color: var(--sbi-accent); font-weight: bold; }
+        .gov-tracker li.pending { color: #888888; }
+
+        /* OFFICIAL NOTIFICATION BOX */
+        .notice-board {
+            background-color: #fff9e6;
+            border: 1px solid var(--gov-gold);
+            padding: 10px;
+            font-size: 12px;
+            color: #664d03;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--gov-blue);
+            color: #ffffff;
+            text-align: center;
+            padding: 15px;
+            font-size: 11px;
+            border-top: 3px solid var(--gov-gold);
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin-bottom: 4px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-gov-bar">
+        <span>Government of India Procurement Portal</span>
+        <span>Standardization Testing and Quality Certification (STQC) Verified</span>
+    </div>
+
+    <header>
+        <div class="brand-container">
+            <div class="brand-logo">🌾</div>
+            <div class="brand-text">
+                <h1>KisanFlow</h1>
+                <p>Smart Agricultural Procurement Management System</p>
+            </div>
+        </div>
+        <div class="header-controls">
+            <button class="lang-btn active">English</button>
+            <button class="lang-btn">हिंदी</button>
+            <button class="header-btn">🔔 Notifications</button>
+            <button class="header-btn">👤 Profile</button>
+        </div>
+    </header>
+
+    <nav>
+        <a href="farmer-dashboard.html" class="active">Dashboard</a>
+        <a href="book-slot.html">Book Slot</a>
+        <a href="queue.html">My Queue</a>
+        <a href="procurement.html">Procurement Status</a>
+        <a href="#">My Records</a>
+        <a href="index.html" class="logout">Logout</a>
+    </nav>
+
+    <main>
+
+        <div class="welcome-banner full-width">
+            <div>
+                <h2>Welcome, Farmer!</h2>
+                <p>Manage your procurement appointments, monitor live token queue, and check status records.</p>
+            </div>
+        </div>
+
+        <div>
+
+            <div class="portal-card">
+                <div class="portal-card-header">
+                    <span class="portal-card-title">📅 My Appointment Details</span>
+                </div>
+                <div class="portal-card-body">
+                    <table class="gov-table">
+                        <tr>
+                            <td class="label">Procurement Centre</td>
+                            <td class="value">Ghaziabad Procurement Centre</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Scheduled Date</td>
+                            <td class="value">5 September 2026</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Time Slot</td>
+                            <td class="value">10:00 AM - 11:00 AM</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Token Number</td>
+                            <td class="value" style="color: var(--sbi-accent); font-size: 1.1rem;">#45</td>
+                        </tr>
+                    </table>
+                    <button class="btn-gov">View Appointment Slip</button>
+                </div>
+            </div>
+
+            <div class="portal-card">
+                <div class="portal-card-header">
+                    <span class="portal-card-title">🔄 Live Token Status</span>
+                </div>
+                <div class="portal-card-body">
+                    <table class="gov-table">
+                        <tr>
+                            <td class="label">Currently Serving Token</td>
+                            <td class="value">#42</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Your Assigned Token</td>
+                            <td class="value">#45</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Tokens Ahead</td>
+                            <td class="value">3 Farmers</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Estimated Waiting Time</td>
+                            <td class="value">25 minutes</td>
+                        </tr>
+                    </table>
+                    <button class="btn-gov btn-gov-orange">Track My Queue</button>
+                </div>
+            </div>
+
+            <div class="portal-card">
+                <div class="portal-card-header">
+                    <span class="portal-card-title">⚡ Quick Services</span>
+                </div>
+                <div class="portal-card-body">
+                    <div class="quick-grid">
+                        <div class="action-tab" onclick="location.href='book-slot.html'">
+                            <span>📅</span>
+                            <span>Book New Slot</span>
+                        </div>
+                        <div class="action-tab" onclick="location.href='queue.html'">
+                            <span>📊</span>
+                            <span>Track Queue</span>
+                        </div>
+                        <div class="action-tab" onclick="location.href='procurement.html'">
+                            <span>📑</span>
+                            <span>Procurement Status</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+
+            <div class="portal-card">
+                <div class="portal-card-header">
+                    <span class="portal-card-title">🔔 Official Alert</span>
+                </div>
+                <div class="portal-card-body">
+                    <div class="notice-board">
+                        <strong>Important Notice:</strong> Your appointment is scheduled for 10:00 AM. Please arrive at least 15 minutes before your allotted time slot with valid photo identification.
+                    </div>
+                </div>
+            </div>
+
+            <div class="portal-card">
+                <div class="portal-card-header">
+                    <span class="portal-card-title">🌾 Workflow Progress</span>
+                </div>
+                <div class="portal-card-body">
+                    <ul class="gov-tracker">
+                        <li class="completed"><span class="status-icon">✔</span> Farmer Registration</li>
+                        <li class="completed"><span class="status-icon">✔</span> Slot Booking</li>
+                        <li class="completed"><span class="status-icon">✔</span> Arrival at Centre</li>
+                        <li class="current"><span class="status-icon">🔄</span> Document Verification</li>
+                        <li class="pending"><span class="status-icon">⏳</span> Procurement</li>
+                        <li class="pending"><span class="status-icon">⏳</span> Payment Dispersal</li>
+                    </ul>
+                    <button class="btn-gov" onclick="location.href='procurement.html'" style="width: 100%;">View Full Status</button>
+                </div>
+            </div>
+
+            <div class="portal-card">
+                <div class="portal-card-header">
+                    <span class="portal-card-title">📍 Nearby Centre Info</span>
+                </div>
+                <div class="portal-card-body">
+                    <table class="gov-table">
+                        <tr>
+                            <td class="label">Centre</td>
+                            <td class="value">Ghaziabad Procurement Centre</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Distance</td>
+                            <td class="value">4.5 km</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Wait Time</td>
+                            <td class="value">~25 mins</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Status</td>
+                            <td class="value" style="color: var(--success-green);">Slots Available</td>
+                        </tr>
+                    </table>
+                    <button class="btn-gov" style="width: 100%;">View Centre Details</button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 KisanFlow | SIH26032 | Smart Agricultural Procurement Management System</p>
+        <p>Designed and maintained in compliance with Government Website Guidelines.</p>
+    </footer>
+
+</body>
+
+</html>
