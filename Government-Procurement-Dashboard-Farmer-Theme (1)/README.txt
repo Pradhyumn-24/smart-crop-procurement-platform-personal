@@ -1,0 +1,1 @@
+Government Procurement Dashboard — Multi-page version using the SAME top navigation, branding structure, colors, typography and footer system as the Farmer Dashboard. Open dashboard.html. All navigation items are separate HTML pages. Prototype/demo data only.
