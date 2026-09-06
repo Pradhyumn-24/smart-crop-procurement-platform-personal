@@ -1,0 +1,1287 @@
+/* ==========================================================================
+   अपनी BAARI (APNI BAARI) - Smart Grain Procurement & Queue Portal
+   Indian Government Portal Theme (Inspired by UIDAI & Digital India)
+   ========================================================================== */
+
+:root {
+  --gov-blue-dark: #072a4a;
+  --gov-blue: #0b4582;
+  --gov-blue-light: #1a64b2;
+  --gov-saffron: #f37021;
+  --gov-saffron-light: #fff2e8;
+  --gov-green: #138808;
+  --gov-green-light: #eafaf1;
+  --gov-gold: #cca03d;
+  --gov-gray-bg: #f4f7fa;
+  --gov-border: #d2dce8;
+  --gov-text: #212529;
+  --gov-text-muted: #596574;
+  --gov-card-shadow: 0 4px 14px rgba(0, 35, 75, 0.08);
+  --gov-radius: 8px;
+  --font-base: 16px;
+}
+
+/* High Contrast Mode Variables */
+body.high-contrast {
+  --gov-gray-bg: #000000;
+  --gov-card-shadow: none;
+  --gov-border: #ffffff;
+  --gov-text: #ffffff;
+  --gov-text-muted: #e0e0e0;
+  --gov-blue-dark: #000000;
+  --gov-blue: #111111;
+  --gov-saffron-light: #222222;
+  --gov-green-light: #112211;
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+body.high-contrast .card,
+body.high-contrast .header-main,
+body.high-contrast .top-accessibility-bar,
+body.high-contrast .gov-nav,
+body.high-contrast .modal-content,
+body.high-contrast .whatsapp-window {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+body.high-contrast a,
+body.high-contrast button {
+  color: #ffeb3b !important;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Mukta', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: var(--font-base);
+  line-height: 1.5;
+  color: var(--gov-text);
+  background-color: var(--gov-gray-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Tricolor Bar */
+.tricolor-stripe {
+  height: 5px;
+  background: linear-gradient(90deg, #FF9933 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #138808 66.6%);
+  width: 100%;
+}
+
+/* Accessibility Top Utility Bar */
+.top-accessibility-bar {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 4px 20px;
+  font-size: 0.82rem;
+  color: var(--gov-text-muted);
+}
+
+.top-bar-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gov-brand-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* .gov-flag-icon {
+  width: 18px;
+  height: 12px;
+  display: inline-block;
+  background: linear-gradient(#ff9933 33%, #fff 33%, #fff 66%, #138808 66%);
+  border: 1px solid #ccc;
+  border-radius: 2px;
+} */
+
+/* .gov-flag-icon {
+  width: 60px;
+  height: 40px;
+  display: inline-block;
+  background: linear-gradient(
+    to bottom,
+    #FF9933 0%, #FF9933 33.33%,
+    #FFFFFF 33.33%, #FFFFFF 66.66%,
+    #138808 66.66%, #138808 100%
+  );
+  position: relative;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+.gov-flag-icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 11px;
+  height: 11px;
+  border: 1.5px solid #000080;
+  border-radius: 50%;
+  background-image: repeating-conic-gradient(
+    #000080 0deg 2deg,
+    transparent 2deg 15deg
+  );
+} */
+
+.gov-flag-icon {
+  width: 18px;
+  height: 12px;
+  display: inline-block;
+  background: linear-gradient(#ff9933 33.33%, #ffffff 33.33%, #ffffff 66.66%, #138808 66.66%);
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Ashoka Chakra */
+.gov-flag-icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3.5px;
+  height: 3.5px;
+  border: 0.8px solid #000080;
+  border-radius: 50%;
+  background-image: repeating-conic-gradient(
+    #000080 0deg 2deg,
+    transparent 2deg 15deg
+  );
+}
+
+.accessibility-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-acc {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-acc:hover {
+  background: var(--gov-blue);
+  color: #fff;
+  border-color: var(--gov-blue);
+}
+
+.lang-switch-btn {
+  background: #fff;
+  border: 1px solid var(--gov-blue);
+  color: var(--gov-blue);
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lang-switch-btn.active {
+  background: var(--gov-blue);
+  color: #fff;
+}
+
+/* Main Header */
+.header-main {
+  background: #ffffff;
+  border-bottom: 2px solid var(--gov-border);
+  padding: 12px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.emblem-img {
+  width: 44px;
+  height: auto;
+}
+
+.ministry-title {
+  border-left: 2px solid #e2e8f0;
+  padding-left: 14px;
+}
+
+.ministry-title h2 {
+  font-size: 1.15rem;
+  color: var(--gov-blue-dark);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.ministry-title h3 {
+  font-size: 0.88rem;
+  color: var(--gov-text-muted);
+  font-weight: 500;
+}
+
+.ministry-title .dept-tag {
+  display: inline-block;
+  background: var(--gov-saffron-light);
+  color: var(--gov-saffron);
+  font-size: 0.75rem;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.portal-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.portal-logo-img {
+  height: 58px;
+  width: auto;
+  object-fit: contain;
+}
+
+.portal-subtext {
+  text-align: right;
+}
+
+.portal-subtext .brand-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #b71c1c;
+  line-height: 1.1;
+}
+
+.portal-subtext .brand-desc {
+  font-size: 0.78rem;
+  color: var(--gov-green);
+  font-weight: 700;
+}
+
+/* Government Navigation Bar */
+.gov-nav {
+  background: var(--gov-blue);
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.nav-tab-btn {
+  background: none;
+  border: none;
+  color: #e2e8f0;
+  padding: 14px 20px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 4px solid transparent;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.nav-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.nav-tab-btn.active {
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.15);
+  border-bottom-color: var(--gov-saffron);
+}
+
+.nav-badge {
+  background: var(--gov-saffron);
+  color: #fff;
+  font-size: 0.72rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* Marquee / News Ticker */
+.news-ticker-strip {
+  background: #ffffff;
+  border-bottom: 1px solid var(--gov-border);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  font-size: 0.88rem;
+}
+
+.ticker-label {
+  background: var(--gov-saffron);
+  color: #fff;
+  padding: 8px 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  z-index: 2;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.ticker-marquee {
+  display: flex;
+  white-space: nowrap;
+  animation: scroll-left 32s linear infinite;
+  padding-left: 20px;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 40px;
+  color: var(--gov-blue-dark);
+  font-weight: 600;
+}
+
+.ticker-item .badge {
+  font-size: 0.72rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #e2e8f0;
+  color: #333;
+}
+
+.badge-green { background: #d4edda !important; color: #155724 !important; }
+.badge-red { background: #f8d7da !important; color: #721c24 !important; }
+.badge-yellow { background: #fff3cd !important; color: #856404 !important; }
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Main Container & Layout */
+.main-wrapper {
+  max-width: 1280px;
+  margin: 20px auto;
+  padding: 0 16px;
+  flex: 1;
+  width: 100%;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+/* Card Component */
+.card {
+  background: #ffffff;
+  border-radius: var(--gov-radius);
+  border: 1px solid var(--gov-border);
+  box-shadow: var(--gov-card-shadow);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card-header-styled {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eef2f6;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.card-header-styled h3 {
+  font-size: 1.2rem;
+  color: var(--gov-blue-dark);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-header-styled h3::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  background: var(--gov-saffron);
+  border-radius: 2px;
+}
+
+/* Quick Metrics Row */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.metric-card {
+  background: #ffffff;
+  border-radius: var(--gov-radius);
+  border-left: 5px solid var(--gov-blue);
+  padding: 16px;
+  box-shadow: var(--gov-card-shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+}
+
+.metric-card.saffron-border { border-left-color: var(--gov-saffron); }
+.metric-card.green-border { border-left-color: var(--gov-green); }
+.metric-card.red-border { border-left-color: #d32f2f; }
+
+.metric-header {
+  font-size: 0.88rem;
+  color: var(--gov-text-muted);
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}
+
+.metric-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--gov-blue-dark);
+  margin: 6px 0;
+  line-height: 1.1;
+}
+
+.metric-sub {
+  font-size: 0.8rem;
+  color: var(--gov-text-muted);
+}
+
+/* Stepper Component (Queue Progress Tracker) */
+.queue-stepper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 30px 0 20px;
+  padding: 0 10px;
+}
+
+.queue-stepper::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: 40px;
+  right: 40px;
+  height: 4px;
+  background: #e2e8f0;
+  z-index: 1;
+}
+
+.step-item {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  flex: 1;
+}
+
+.step-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid #cbd5e1;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+}
+
+.step-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gov-text-muted);
+  line-height: 1.2;
+}
+
+.step-item.completed .step-circle {
+  background: var(--gov-green);
+  border-color: var(--gov-green);
+  color: #ffffff;
+}
+
+.step-item.active .step-circle {
+  background: var(--gov-saffron);
+  border-color: var(--gov-saffron);
+  color: #ffffff;
+  box-shadow: 0 0 0 5px rgba(243, 112, 33, 0.25);
+  animation: pulse-ring 1.8s infinite;
+}
+
+.step-item.active .step-label {
+  color: var(--gov-saffron);
+  font-weight: 800;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Action Banner / Callout */
+.action-banner {
+  background: linear-gradient(135deg, #0b4582 0%, #072a4a 100%);
+  color: #ffffff;
+  border-radius: var(--gov-radius);
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.action-banner-content h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.action-banner-content p {
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  max-width: 650px;
+}
+
+.action-banner-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Primary Buttons */
+.btn-gov {
+  background: var(--gov-saffron);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.btn-gov:hover {
+  background: #d95e14;
+  box-shadow: 0 4px 10px rgba(243, 112, 33, 0.35);
+}
+
+.btn-gov-blue {
+  background: var(--gov-blue);
+  color: #ffffff;
+}
+
+.btn-gov-blue:hover {
+  background: #083464;
+  box-shadow: 0 4px 10px rgba(11, 69, 130, 0.35);
+}
+
+.btn-gov-outline {
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.btn-gov-outline:hover {
+  background: #ffffff;
+  color: var(--gov-blue);
+}
+
+.btn-gov-green {
+  background: var(--gov-green);
+  color: #ffffff;
+}
+
+.btn-gov-green:hover {
+  background: #0f6c06;
+}
+
+/* Live Token Card Display */
+.token-hero-card {
+  background: #ffffff;
+  border: 2px solid var(--gov-blue);
+  border-radius: var(--gov-radius);
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(11, 69, 130, 0.12);
+  margin-bottom: 24px;
+}
+
+.token-hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  border-bottom: 1px dashed var(--gov-border);
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.token-big-id {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--gov-blue-dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.token-hero-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.token-detail-box .detail-title {
+  font-size: 0.78rem;
+  color: var(--gov-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.token-detail-box .detail-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gov-blue-dark);
+  margin-top: 2px;
+}
+
+/* Weather Advisory Banner */
+.weather-advisory-box {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-left: 6px solid #f57f17;
+  border-radius: 6px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.weather-advisory-box.rain-alert {
+  background: #e3f2fd;
+  border-color: #90caf9;
+  border-left-color: #1976d2;
+}
+
+.weather-info-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.weather-icon-large {
+  font-size: 2.2rem;
+}
+
+/* Forms & Modals */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(2px);
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: var(--gov-radius);
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border-top: 5px solid var(--gov-saffron);
+}
+
+.modal-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--gov-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  color: var(--gov-blue-dark);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #64748b;
+}
+
+.modal-body {
+  padding: 20px 24px;
+}
+
+.modal-footer {
+  padding: 14px 24px;
+  background: #f8fafc;
+  border-top: 1px solid var(--gov-border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--gov-blue-dark);
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--gov-blue);
+  box-shadow: 0 0 0 3px rgba(11, 69, 130, 0.12);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Tables */
+.table-responsive {
+  overflow-x: auto;
+  margin-top: 12px;
+}
+
+.gov-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.gov-table th {
+  background: #f1f5f9;
+  color: var(--gov-blue-dark);
+  font-weight: 700;
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 2px solid #cbd5e1;
+}
+
+.gov-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  color: var(--gov-text);
+}
+
+.gov-table tr:hover {
+  background: #f8fafc;
+}
+
+/* Status Badges */
+.status-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-booked { background: #e0f2fe; color: #0284c7; }
+.status-arrived { background: #fef3c7; color: #d97706; }
+.status-weighbridge { background: #ffedd5; color: #c2410c; }
+.status-quality { background: #ede9fe; color: #7c3aed; }
+.status-unloading { background: #fce7f3; color: #db2777; }
+.status-completed { background: #dcfce7; color: #15803d; }
+
+/* AI Scanner Interface */
+.scanner-viewport {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  background: #111827;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.scanner-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.scanner-laser-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #00ffcc;
+  box-shadow: 0 0 15px #00ffcc;
+  z-index: 5;
+  display: none;
+}
+
+.scanner-laser-line.scanning {
+  display: block;
+  animation: scan-vertical 2.2s ease-in-out infinite;
+}
+
+@keyframes scan-vertical {
+  0% { top: 5%; }
+  50% { top: 92%; }
+  100% { top: 5%; }
+}
+
+.scanner-grid-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.ai-stat-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+}
+
+.ai-stat-card .val {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--gov-blue-dark);
+}
+
+.ai-stat-card .lbl {
+  font-size: 0.75rem;
+  color: var(--gov-text-muted);
+  font-weight: 600;
+}
+
+/* Floating WhatsApp Bot Drawer */
+.whatsapp-floater {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 900;
+}
+
+.whatsapp-trigger-btn {
+  background: #25d366;
+  color: #ffffff;
+  border: none;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.whatsapp-trigger-btn:hover {
+  transform: scale(1.08);
+}
+
+.whatsapp-trigger-btn svg {
+  width: 32px;
+  height: 32px;
+  fill: currentColor;
+}
+
+.whatsapp-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: #d32f2f;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+}
+
+.whatsapp-window {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  width: 360px;
+  height: 520px;
+  background: #efeae2;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 901;
+  border: 1px solid #dcdcdc;
+}
+
+.whatsapp-window.open {
+  display: flex;
+}
+
+.whatsapp-header {
+  background: #075e54;
+  color: #fff;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.whatsapp-header-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.whatsapp-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #075e54;
+  font-size: 1.1rem;
+}
+
+.whatsapp-messages-container {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wa-msg {
+  max-width: 82%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  line-height: 1.35;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.wa-msg.bot {
+  background: #ffffff;
+  color: #111;
+  align-self: flex-start;
+  border-top-left-radius: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.wa-msg.user {
+  background: #dcf8c6;
+  color: #111;
+  align-self: flex-end;
+  border-top-right-radius: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.wa-time {
+  font-size: 0.65rem;
+  color: #888;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.whatsapp-quick-chips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border-top: 1px solid #e0e0e0;
+}
+
+.wa-chip {
+  background: #fff;
+  border: 1px solid #075e54;
+  color: #075e54;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.wa-chip:hover {
+  background: #075e54;
+  color: #fff;
+}
+
+.whatsapp-input-bar {
+  background: #f0f0f0;
+  padding: 8px 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.wa-input {
+  flex: 1;
+  border: none;
+  background: #fff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.wa-send-btn {
+  background: #075e54;
+  color: #fff;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* J-Form Printable Receipt */
+.jform-preview {
+  border: 2px solid #000;
+  padding: 24px;
+  font-family: 'Courier New', Courier, monospace;
+  background: #fffef5;
+  color: #000;
+}
+
+.jform-title {
+  text-align: center;
+  border-bottom: 2px solid #000;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+/* Offline Banner */
+.offline-sync-bar {
+  background: #d97706;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.offline-sync-bar.active {
+  display: flex;
+}
+
+/* Footer */
+.gov-footer {
+  background: #072a4a;
+  color: #94a3b8;
+  padding: 30px 20px 20px;
+  font-size: 0.85rem;
+  margin-top: auto;
+  border-top: 4px solid var(--gov-saffron);
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.footer-col h4 {
+  color: #ffffff;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  border-left: 3px solid var(--gov-saffron);
+  padding-left: 8px;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 6px;
+}
+
+.footer-col a {
+  color: #94a3b8;
+  text-decoration: none;
+}
+
+.footer-col a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 16px;
+  border-top: 1px solid #1e3a5f;
+  text-align: center;
+  font-size: 0.78rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .portal-subtext {
+    text-align: left;
+  }
+  .queue-stepper {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .queue-stepper::before {
+    display: none;
+  }
+  .whatsapp-window {
+    width: 92%;
+    right: 4%;
+    bottom: 85px;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
